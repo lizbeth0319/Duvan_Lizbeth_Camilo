@@ -14,11 +14,16 @@ export const getALLAddresses = async (req, res) => {
 /*• GET /api/direcciones-nucleo/:id - Obtener por ID*/
 export const getAddressById = async (req, res) => {
     try {
-        const address = await coreAddress.findById(req.params.id).select('-password');
+        const {name}=req.params.id
+        const address = await coreAddress.find({name:String(name)},'-password');
         if (!address) {
             return res.status(404).json({ message: 'Dirección del nucleo no encontrada.' });
         }
-        res.status(200).json(address);
+        res.status(200).json({
+            succes: true,
+            msg:'No encontrado',
+            data:address
+        });
     } catch (err) {
         res.status(500).json({ error: 'Error al obtener la dirección de núcleo.' });
     }
