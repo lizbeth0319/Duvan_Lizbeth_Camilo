@@ -1,6 +1,5 @@
-/* const { response } = require('express')*/
-const mongoose = require('mongoose')
-
+import { response } from 'express';
+import mongoose from 'mongoose';
 
 const direccionNucleoSchema = new mongoose.Schema({
 

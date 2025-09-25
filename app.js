@@ -1,7 +1,10 @@
 import express from 'express';
 import coreAddressRoutes from './routes/coreAddressRoutes.js';
+import { connectDB } from './db.js';
 
 const app = express();
+
+connectDB();
 
 app.use(express.json());
 
