@@ -11,7 +11,7 @@ export const getALLAddresses = async (req, res) => {
     }
 };
 
-/*• GET /api/direcciones-nucleo/:id - Obtener por ID*/
+/*• GET /api/direcciones-nucleo/:id - Obtener por nombre*/
 export const getAddressById = async (req, res) => {
     try {
         const {name}=req.params.id
