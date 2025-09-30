@@ -7,12 +7,13 @@
     changePassword,
     deleteCoreAddress */
 
+
 import coreAddress from '../models/coreAddress.js';
 import bcypt from 'bcryptjs';
 // import jwt from 'jsonwebtoken';
 
 /* •   GET /api/direcciones-nucleo - Listar todas */
-export const getALLAddresses = async (req, res) => {
+export const getAllAddresses = async (req, res) => {
     try {
         const address = await coreAddress.find().select('-password');
         res.status(200).json(address);

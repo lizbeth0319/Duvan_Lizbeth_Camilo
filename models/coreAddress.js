@@ -1,4 +1,4 @@
-import { response } from 'express';
+import express from 'express';
 import mongoose from 'mongoose';
 
 const direccionNucleoSchema = new mongoose.Schema({
@@ -60,4 +60,4 @@ direccionNucleoSchema.pre('save', function (next) {
   next();
 });
 
-module.exports = mongoose.model('coreAddress', direccionNucleoSchema);
+export default mongoose.model('coreAddress', direccionNucleoSchema);

@@ -1,4 +1,4 @@
-import { Router } from "express";
+import express from "express";
 import {
     getAllAddresses,
     getAddressById,
@@ -10,7 +10,7 @@ import {
     deleteCoreAddress
 } from '../controllers/controllerCoreAddress.js'
 
-const router = Router();
+const router = express.Router();
 
 router.get('/core-address', getAllAddresses);
 
