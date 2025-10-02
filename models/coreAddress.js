@@ -32,7 +32,7 @@ const direccionNucleoSchema = new mongoose.Schema({
         trim: true,
         match: [/.+@.+\..+/, 'Por favor, ingrese un correo válido'],
     },
-    password_hash: {
+    password: {
         type: String,
         required: [true, 'La contraseña es obligatoria'],
         minlength: [6, 'La contraseña debe tener al menos 6 caracteres'],

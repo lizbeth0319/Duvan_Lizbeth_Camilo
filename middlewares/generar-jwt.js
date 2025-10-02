@@ -1,20 +1,21 @@
-import jwt from "jsonwebtoken";
-import "dotenv/config";
+import jwt from 'jsonwebtoken';
 
-//const payload
-
-export const generarJWT = (uid) => {
+export const generarJWT = (uid = '') => {
     return new Promise((resolve, reject) => {
         const payload = { uid };
-        jwt.sign(payload, process.env.JWT_KEY, {
-            expiresIn: "4h"//4h
-        }, (err, token) => {
-            if (err) {
-                console.log(err);
-                reject("No se pudo generar el token")
-            } else {
-                resolve(token);
+
+        jwt.sign(
+            payload,
+            process.env.JWT_KEY, // 👈 cambia esto por tu clave real en .env
+            { expiresIn: '12h' }, // duración del token
+            (err, token) => {
+                if (err) {
+                    console.error(err);
+                    reject('No se pudo generar el token');
+                } else {
+                    resolve(token);
+                }
             }
-        })
-    })
-}
+        );
+    });
+};

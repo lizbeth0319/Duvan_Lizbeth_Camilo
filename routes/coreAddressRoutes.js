@@ -1,5 +1,6 @@
 // router.js
 import { Router } from "express";
+import direccionNucleo from "../models/coreAddress.js";
 import {
     getALLAddresses,
     getAddressById,
@@ -11,19 +12,23 @@ import {
     deleteCoreAddress
 } from '../controllers/controllerCoreAddress.js'
 import { check } from "express-validator";
+
 // No necesitamos importar el helper aquí, solo los controladores.
 // import helpercoreAddres from "../helpers/coreAddress.js"; 
-import { validarCampos } from "../middlewares/validar-campos.js"; // Asumo un middleware para manejar errores de validación
+import { validarCampos } from "../middlewares/validar-campos.js"; // Middleware para manejar errores de validación
+import { validarJWT } from "../middlewares/validar-jwt.js";
 
 const router = Router();
 router.get('/core-address/listado',
+    validarJWT,
     getALLAddresses
 )
-// GET /api/core-address/:name (Obtener por nombre)
-router.get('/core-address/:name', 
+
+// GET /api/core-address/id/:id (Obtener por ID)
+router.get('/core-address/:id',
     [
-        check('name', 'El nombre es obligatorio').not().isEmpty(),
-        validarCampos 
+        check('id', 'El ID es obligatorio').isMongoId(),
+        validarCampos
     ],
     getAddressById
 );
@@ -44,7 +49,7 @@ router.post('/core-address',
         check('password', 'La contraseña debe tener más de 6 caracteres').isLength({ min: 6 }),
         check('responsable', 'El responsable es obligatorio').not().isEmpty(),
         validarCampos
-    ],
+    ], 
     createCoreAddress
 );
 
