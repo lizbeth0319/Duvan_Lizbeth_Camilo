@@ -1,4 +1,4 @@
-/* 11. Acudiente  (Rector, Coordinador y Secretaria)
+ /* 11. Acudiente  (Rector, Coordinador y Secretaria)
 {
 _id: Object
 nombres: String,
