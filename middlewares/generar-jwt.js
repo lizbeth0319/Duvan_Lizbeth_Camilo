@@ -6,7 +6,7 @@ export const generarJWT = (uid = '') => {
 
     jwt.sign(
       payload,
-      process.env.JWT_SECRET, // 👈 cambia esto por tu clave real en .env
+      process.env.JWT_KEY, // 👈 cambia esto por tu clave real en .env
       { expiresIn: '12h' }, // duración del token
       (err, token) => {
         if (err) {

@@ -1,6 +1,5 @@
 // router.js
 import { Router } from "express";
-import direccionNucleo from "../models/coreAddress.js";
 import {
     getALLAddresses,
     getAddressById,
@@ -12,12 +11,14 @@ import {
     deleteCoreAddress
 } from '../controllers/controllerCoreAddress.js'
 import { check } from "express-validator";
+
 // No necesitamos importar el helper aquí, solo los controladores.
 // import helpercoreAddres from "../helpers/coreAddress.js"; 
 import { validarCampos } from "../middlewares/validar-campos.js"; // Middleware para manejar errores de validación
-
+import { validarJWT } from "../middlewares/validar-jwt.js";
 const router = Router();
 router.get('/core-address/listado',
+    validarJWT,
     getALLAddresses
 )
 
@@ -90,6 +91,5 @@ router.delete('/core-address/:id',
     ],
     deleteCoreAddress
 );
-
 
 export default router;

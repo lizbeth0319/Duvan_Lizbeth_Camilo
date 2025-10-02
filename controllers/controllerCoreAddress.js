@@ -10,9 +10,9 @@
 
 import coreAddress from '../models/coreAddress.js';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import * as coreAddressHelper from "../helpers/coreAddress.js";
 import direccionNucleo from '../models/coreAddress.js';
+import { generarJWT } from '../middlewares/generar-jwt.js';
 
 /* •   GET /api/direcciones-nucleo - Listar todas */
 export const getALLAddresses = async (req, res) => {
@@ -123,34 +123,33 @@ export const createCoreAddress = async (req, res) => {
 
 /* •   POST /api/direcciones-nucleo/login - Login */
 export const enterCoreAddress = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+    try {
+        const { email, password } = req.body;
 
-    // Buscar usuario incluyendo password_hash
-    const user = await direccionNucleo.findOne({ email }).select("+password");
+        const user = await direccionNucleo.findOne({ email }).select("+password");
 
-    if (!user) {
-      return res.status(404).json({ msg: "Dirección del nucleo no encontrada." });
+        if (!user) {
+            return res.status(404).json({ msg: "Dirección del nucleo no encontrada." });
+        }
+
+        // Comparar contraseñas
+        const validPassword = await bcrypt.compare(password, user.password);
+        if (!validPassword) {
+            return res.status(400).json({ msg: "Contraseña incorrecta." });
+        }
+        const token =await generarJWT(user.email);
+        res.json({
+            msg: "Login exitoso",
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email
+            }, token
+        });
+    } catch (error) {
+        console.error("Error en login:", error);
+        res.status(500).json({ msg: "Error en el servidor", error });
     }
-
-    // Comparar contraseñas
-    const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword) {
-      return res.status(400).json({ msg: "Contraseña incorrecta." });
-    }
-
-    res.json({
-      msg: "Login exitoso",
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email
-      }
-    });
-  } catch (error) {
-    console.error("Error en login:", error);
-    res.status(500).json({ msg: "Error en el servidor", error });
-  }
 };
 
 
