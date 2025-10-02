@@ -1,9 +1,10 @@
+
 import { response } from 'express';
 import mongoose, { model } from 'mongoose';
 
 const direccionNucleoSchema = new mongoose.Schema({
 
-    name: {
+    name: { 
         type: String,
         require: [true, 'El nombre es requerido.'],
         trim: true,

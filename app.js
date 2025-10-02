@@ -1,6 +1,6 @@
 import express from 'express';
 import coreAddressRoutes from './routes/coreAddressRoutes.js';
-import { connectDB } from './db.js'
+import { connectDB } from './services/db.js'
 
 const app = express();
 
