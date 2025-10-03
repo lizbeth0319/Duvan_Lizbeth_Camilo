@@ -64,8 +64,8 @@ export const verificarCredenciales = async (email, password) => {
 };
 
 // ------------------- ACTUALIZAR DATOS -------------------
-export const updateAddressByName = async (nombre, updateFields) => {
-    const addressFound = await coreAddress.findOne({ name: String(nombre) });
+export const updateAddressById = async (userId, updateFields) => {
+    const addressFound = await coreAddress.findById(userId);
 
     if (!addressFound) {
         return null;
@@ -133,7 +133,7 @@ export const deleteAddressById = async (addressId) => {
         const usuario = await coreAddress.findOne({ email });
         if (!usuario) throw new Error('Credenciales inválidas');
 
-        // 💡 CAMBIA 'usuario.password' por 'usuario.password_hash'
+        // CAMBIA 'usuario.password' por 'usuario.password_hash'
         const validaPassword = await bcrypt.compare(password, usuario.password_hash);
 
         if (!validaPassword) throw new Error('Credenciales inválidas');

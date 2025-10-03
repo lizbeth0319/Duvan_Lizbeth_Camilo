@@ -20,7 +20,7 @@ export const getALLAddresses = async (req, res) => {
         const address = await coreAddress.find().select('-password');
         res.status(200).json({
             succes: true,
-            msg: 'listado',
+            msg: 'Listado',
             data:address
         }); 
     } catch (err) {
@@ -54,7 +54,7 @@ export const getAddressById = async (req, res) => {
 
 
 /* • GET /api/direcciones-nucleo/me – Obtener perfil de la dirección-nucleo*/
-export const getAddressProfile = async (req, res) => {
+/* export const getAddressProfile = async (req, res) => {
     try {
         const address = await coreAddressHelper.getAddressProfileData(req.user.id); //  HELPER
         
@@ -66,13 +66,13 @@ export const getAddressProfile = async (req, res) => {
             succes: true,
             msg: 'direccion nucleo ',
             data: address
-        });
+        }); 
     } catch (err) {
         res.status(500).json({ 
             error: 'Error al obtener el perfil de la dirección de núcleo.'
         });
     }
-};
+}; */
 /* •   POST /api/direcciones-nucleo – Crear */
 export const createCoreAddress = async (req, res) => {
   try {
@@ -156,18 +156,18 @@ export const enterCoreAddress = async (req, res) => {
 /* •   PUT /api/direcciones-nucleo/:id – Actualizar*/
 export const updateCoreAddress = async (req, res) => {
     try {
-        const {nombre} = req.params 
+        const {id} = req.params 
         const updateFields = req.body;
         
         delete updateFields.code; 
         delete updateFields.password;
         
-        const userResponse = await coreAddressHelper.updateAddressByName(nombre, updateFields); // HELPER
+        const userResponse = await coreAddressHelper.updateAddressById(id, updateFields); // HELPER
 
         if (!userResponse) {
             return res.status(404).json({
                 success: false,
-                msg: "no encontrado"
+                msg: "No encontrado"
             });
         }
 

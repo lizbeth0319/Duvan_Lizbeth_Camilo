@@ -3,8 +3,8 @@ import { Router } from "express";
 import {
     getALLAddresses,
     getAddressById,
-    getAddressProfile,
-    createCoreAddress,
+/*     getAddressProfile,
+ */    createCoreAddress,
     enterCoreAddress,
     updateCoreAddress,
     changePassword,
@@ -17,6 +17,8 @@ import { check } from "express-validator";
 import { validarCampos } from "../middlewares/validar-campos.js"; // Middleware para manejar errores de validación
 import { validarJWT } from "../middlewares/validar-jwt.js";
 const router = Router();
+
+// GET /api/core-address/listado (Obtener todo)
 router.get('/core-address/listado',
     validarJWT,
     getALLAddresses
@@ -31,10 +33,10 @@ router.get('/core-address/:id',
     getAddressById
 );
 
-// GET /api/core-address/me (Obtener perfil)
+/* // GET /api/core-address/me (Obtener perfil)
 router.get('/core-address/me', 
     getAddressProfile 
-);
+); */
 
 // POST /api/core-address (Crear)
 router.post('/core-address', 
@@ -61,10 +63,10 @@ router.post('/core-address/login',
     enterCoreAddress
 );
 
-// PUT /api/core-address/:name (Actualizar)
-router.put('/core-address/:name', 
+// PUT /api/core-address/:id (Actualizar)
+router.put('/core-address/:id', 
     [
-        check('name', 'El nombre en el parámetro es obligatorio').not().isEmpty(),
+        check('id', 'El ID del usuario es obligatorio').not().isEmpty(),
         check('email').optional().isEmail(),
         check('phone').optional().isMobilePhone(),
         validarCampos

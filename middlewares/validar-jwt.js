@@ -10,12 +10,12 @@ export const validarJWT = async (req, res, next) => {
         });
     }
     try {
-        console.log('entro a función validarJWT')
+        console.log('Entro a función validarJWT')
         const payload = jwt.verify(token, process.env.JWT_KEY); 
         const { email } = payload;
 
         let usuario = await direccionNucleo.find({ email });
-        console.log('email',email)
+        console.log('Email',email)
 
         if (!usuario) {
             return res.status(401).json({
