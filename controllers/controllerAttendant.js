@@ -5,7 +5,7 @@
 •	POST /api/acudientes -  crear acudientes 
 •	PUT /api/acudientes/:id -  actualizar acudientes por ID 
 •	PUT /api/acudientes/:id/activar -  activar acudiente
-•	PUT /api/acudientes/:id/desactivar -  desactivar acudiente
+•	PUT /api/acudientes/:id/desactivar -  desactivar acudiente 
 •	DELETE /api/acudientes/:id - eliminar acudiente */
 
 
